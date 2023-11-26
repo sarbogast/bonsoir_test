@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             final host = resolvedService.host;
             final port = resolvedService.port;
             if (host != null && port != 0) {
-              debugPrint('Connecting to conductor $userId at $host:$port');
+              debugPrint('Connecting to server $userId at $host:$port');
             }
           }
         } else if (event.type ==
