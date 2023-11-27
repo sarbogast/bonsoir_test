@@ -7,7 +7,7 @@ import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_web_socket/shelf_web_socket.dart' as web_socket_server;
 import 'package:uuid/uuid.dart';
 
-const serviceName = 'com.epseelon.bonsoir_test';
+const serviceName = 'bonsoirtest';
 const servicePort = 8080;
 
 void main() {
