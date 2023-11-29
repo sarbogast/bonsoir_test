@@ -43,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
   BonsoirBroadcast? _broadcast;
   BonsoirDiscovery? _discovery;
   HttpServer? _server;
+  bool _broadcasting = false;
+  bool _discovering = false;
 
   @override
   void dispose() {
@@ -78,8 +80,25 @@ class _MyHomePageState extends State<MyHomePage> {
       // And now we can broadcast it :
       _broadcast = BonsoirBroadcast(service: service);
       await _broadcast!.ready;
+
+      _broadcast!.eventStream!.listen((event) {
+        debugPrint('Broadcast event : ${event.type}');
+      });
+
       await _broadcast!.start();
+
+      setState(() {
+        _broadcasting = true;
+      });
     }
+  }
+
+  Future<void> _stopBroadcast() async {
+    await _broadcast?.stop();
+    await _server?.close(force: true);
+    setState(() {
+      _broadcasting = false;
+    });
   }
 
   Future<void> _discoverService() async {
@@ -121,6 +140,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Start discovery **after** having listened to discovery events :
     await _discovery?.start();
+    setState(() {
+      _discovering = true;
+    });
+  }
+
+  Future<void> _stopDiscovery() async {
+    await _discovery?.stop();
+    setState(() {
+      _discovering = false;
+    });
   }
 
   @override
@@ -135,13 +164,13 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              onPressed: _broadcastService,
-              child: const Text('Broadcast'),
+              onPressed: _broadcasting ? _stopBroadcast : _broadcastService,
+              child: Text(_broadcasting ? 'Stop broadcasting' : 'Broadcast'),
             ),
             const SizedBox(height: 50),
             ElevatedButton(
-              onPressed: _discoverService,
-              child: const Text('Discover'),
+              onPressed: _discovering ? _stopDiscovery : _discoverService,
+              child: Text(_discovering ? 'Stop discovery' : 'Discover'),
             ),
           ],
         ),
