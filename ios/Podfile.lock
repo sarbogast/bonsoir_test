@@ -1,5 +1,5 @@
 PODS:
-  - bonsoir_darwin (4.1.0):
+  - bonsoir_darwin (0.0.1):
     - Flutter
     - FlutterMacOS
   - connectivity_plus (0.0.1):
@@ -31,7 +31,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/network_info_plus/ios"
 
 SPEC CHECKSUMS:
-  bonsoir_darwin: 2d3880b43c1a409d6226139b5a98404e8cd2e5dd
+  bonsoir_darwin: e3b8526c42ca46a885142df84229131dfabea842
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   network_info_plus: 6d0c3eb8367b8164fa3fb0c19875e3f59d49697f
